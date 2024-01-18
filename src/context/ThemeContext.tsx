@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 
 type Props = {
-	initialTheme?: string // Указывайте типы для свойств
+	initialTheme?: string
 	children: React.ReactNode
 }
 
