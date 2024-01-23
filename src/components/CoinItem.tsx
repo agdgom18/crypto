@@ -16,30 +16,47 @@ const CoinItem: React.FC<Coin> = ({
 	sparkline_in_7d: { price },
 }) => {
 	return (
-		<>
-			<tr key={id}>
-				<td>
-					<AiOutlineStar />
-				</td>
-				<td>{market_cap_rank}</td>
-				<td>
-					<div>
-						<img src={image} alt={id} />
-						<p>{name}</p>
-					</div>
-				</td>
-				<td>{symbol}</td>
-				<td>{current_price}</td>
-				<td>{price_change_percentage_24h}</td>
-				<td>{total_volume}</td>
-				<td>{market_cap}</td>
-				<td>
-					<Sparklines data={price}>
-						<SparklinesLine color='teal' />
-					</Sparklines>
-				</td>
-			</tr>
-		</>
+		<tr className='h-[80px] border-b overflow-hidden'>
+			<td>
+				<AiOutlineStar />
+			</td>
+			<td>{market_cap_rank}</td>
+			<td>
+				<div className='flex items-center'>
+					<img className='w-6 mr-2 rounded-full' src={image} alt={id} />
+					<p className='hidden sm:table-cell'>{name}</p>
+				</div>
+			</td>
+			<td>{symbol.toUpperCase()}</td>
+			<td>
+				{current_price.toLocaleString('en-US', {
+					style: 'currency',
+					currency: 'USD',
+				})}
+			</td>
+
+			<td>
+				{price_change_percentage_24h > 0 ? (
+					<p className='text-green-600'>
+						{price_change_percentage_24h.toFixed(3)}%
+					</p>
+				) : (
+					<p className='text-red-600'>
+						{price_change_percentage_24h.toFixed(3)}%
+					</p>
+				)}
+			</td>
+
+			<td className='w-[180px] hidden md:table-cell'>
+				${total_volume.toLocaleString()}
+			</td>
+			<td className='w-[180px hidden sm:table-cell'>{market_cap}</td>
+			<td>
+				<Sparklines data={price}>
+					<SparklinesLine color='teal' />
+				</Sparklines>
+			</td>
+		</tr>
 	)
 }
 
