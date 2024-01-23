@@ -1,9 +1,14 @@
+import React from 'react'
 import Search from '../components/Search'
 
-const Home = () => {
+type MyProps = {
+	coins: []
+}
+
+const Home: React.FC<MyProps> = ({ coins }) => {
 	return (
 		<>
-			<Search />
+			<Search coins={coins} />
 		</>
 	)
 }
