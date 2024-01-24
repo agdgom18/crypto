@@ -9,11 +9,6 @@ import Home from './routes/Home'
 import SignIn from './routes/SignIn'
 import SignUp from './routes/SignUp'
 function App() {
-	// const { isLoading, data, error } = useQuery({
-	// 	queryFn: () => CoinsService.getAll(),
-	// 	queryKey: ['coins'],
-	// })
-
 	const url =
 		'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true&locale=en'
 
@@ -29,7 +24,6 @@ function App() {
 			})
 			.then(response => {
 				setCoins(response.data)
-				// console.log(coins)
 			})
 	}, [url])
 

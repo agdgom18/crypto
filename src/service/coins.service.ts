@@ -12,4 +12,14 @@ export const CoinsService = {
 			}
 		)
 	},
+	async getTrendinCoins() {
+		return axios
+			.get('https://api.coingecko.com/api/v3/search/trending', {
+				headers: {
+					'cache-control': 'max-age=30,public,must-revalidate,s-maxage=30',
+					'content-type': ' application/json; charset=utf-8',
+				},
+			})
+			.then(res => res.data.coins)
+	},
 }
