@@ -2,24 +2,27 @@ import { useQuery } from '@tanstack/react-query'
 import DOMPurify from 'dompurify'
 import React from 'react'
 import { FaFacebook, FaGithub, FaReddit, FaTwitter } from 'react-icons/fa'
+import { useParams } from 'react-router-dom'
 import { Sparklines, SparklinesLine } from 'react-sparklines'
 import { CoinsService } from '../service/coins.service'
 const CoinPage: React.FC = () => {
+	const { coinId } = useParams()
 	const { data, isLoading } = useQuery({
-		queryFn: () => CoinsService.getCoinById(),
+		queryFn: () =>
+			CoinsService.getCoinById(
+				`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&sparkline=true`
+			),
 		queryKey: ['coinById'],
 	})
-
-	console.log(data)
 	if (isLoading) {
-		return <div>loading ...</div>
+		return <div>Loading ...</div>
 	}
 
 	return (
 		<div className='rounded-div my-12 py-8'>
 			<div className='rounded-div my-12 py-8'>
 				<div className='flex py-8'>
-					<img className='w-20 mr-8' src={data.image?.large} alt='/' />
+					<img className='w-20 mr-8' src={data.image?.large} alt='image' />
 					<div>
 						<p className='text-3xl font-bold'>{data?.name} price</p>
 						<p>({data.symbol?.toUpperCase()} / USD)</p>
@@ -45,7 +48,9 @@ const CoinPage: React.FC = () => {
 							<div>
 								<p className='text-gray-500 text-sm'>Market Cap</p>
 								{data.market_data?.market_cap ? (
-									<p>${data.market_data.market_cap.usd.toLocaleString()}</p>
+									<p className='text-green-600'>
+										${data.market_data.market_cap.usd.toLocaleString()}
+									</p>
 								) : null}
 							</div>
 							<div>
@@ -158,7 +163,7 @@ const CoinPage: React.FC = () => {
 
 				{/* Description */}
 				<div className='py-4'>
-					<p className='text-xl font-bold'>About {data.name}</p>
+					<p className='text-xl font-bold mb-4'>About {data.name}</p>
 					<p
 						dangerouslySetInnerHTML={{
 							__html: DOMPurify.sanitize(

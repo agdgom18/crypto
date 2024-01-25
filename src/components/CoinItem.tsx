@@ -1,5 +1,6 @@
 import React from 'react'
 import { AiOutlineStar } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 import { Sparklines, SparklinesLine } from 'react-sparklines'
 import { Coin } from '../types/coin.types'
 
@@ -22,10 +23,12 @@ const CoinItem: React.FC<Coin> = ({
 			</td>
 			<td>{market_cap_rank}</td>
 			<td>
-				<div className='flex items-center'>
-					<img className='w-6 mr-2 rounded-full' src={image} alt={id} />
-					<p className='hidden sm:table-cell'>{name}</p>
-				</div>
+				<Link to={`coin/${name.toLowerCase()}`}>
+					<div className='flex items-center'>
+						<img className='w-6 mr-2 rounded-full' src={image} alt={id} />
+						<p className='hidden sm:table-cell'>{name}</p>
+					</div>
+				</Link>
 			</td>
 			<td>{symbol.toUpperCase()}</td>
 			<td>
