@@ -7,9 +7,6 @@ const Trending = () => {
 		queryFn: () => CoinsService.getTrendinCoins(),
 		queryKey: ['trendingCoins'],
 	})
-
-	console.log(data)
-
 	if (isLoading) {
 		return <div>Loading...</div>
 	}

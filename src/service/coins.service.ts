@@ -22,4 +22,17 @@ export const CoinsService = {
 			})
 			.then(res => res.data.coins)
 	},
+	async getCoinById() {
+		return axios
+			.get(
+				'https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&sparkline=true',
+				{
+					headers: {
+						'cache-control': 'max-age=30,public,must-revalidate,s-maxage=30',
+						'content-type': ' application/json; charset=utf-8',
+					},
+				}
+			)
+			.then(res => res.data)
+	},
 }
