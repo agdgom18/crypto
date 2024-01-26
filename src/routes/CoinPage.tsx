@@ -31,7 +31,7 @@ const CoinPage: React.FC = () => {
 
 				<div className='grid md:grid-cols-2 gap-8'>
 					<div>
-						<div className='flex justify-between'>
+						<div className='flex mb-4 justify-between'>
 							{data.market_data?.current_price ? (
 								<p className='text-3xl font-bold'>
 									${data.market_data.current_price.usd.toLocaleString()}
